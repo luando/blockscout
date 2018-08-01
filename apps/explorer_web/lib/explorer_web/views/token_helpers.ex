@@ -33,7 +33,7 @@ defmodule ExplorerWeb.TokenHelpers do
   end
 
   defp do_token_transfer_amount(%Token{type: "ERC-721"}, _amount, token_id) do
-    "TokenID [#{token_id}]"
+    "ERC-721 TokenID [#{token_id}]"
   end
 
   defp do_token_transfer_amount(_token, _amount, _token_id) do
