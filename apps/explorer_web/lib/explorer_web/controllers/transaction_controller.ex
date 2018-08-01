@@ -34,6 +34,10 @@ defmodule ExplorerWeb.TransactionController do
   end
 
   def show(conn, %{"id" => id, "locale" => locale}) do
-    redirect(conn, to: transaction_internal_transaction_path(conn, :index, locale, id))
+    if Chain.transaction_has_token_transfers?(id) do
+      redirect(conn, to: transaction_token_transfer_path(conn, :index, locale, id))
+    else
+      redirect(conn, to: transaction_internal_transaction_path(conn, :index, locale, id))
+    end
   end
 end
