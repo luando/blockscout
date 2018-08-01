@@ -1553,4 +1553,11 @@ defmodule Explorer.Chain do
   def count_addresses_in_token_transfers_from_token_hash(token_address_hash) do
     TokenTransfer.count_addresses_in_token_transfers_from_token_hash(token_address_hash)
   end
+
+  @spec transaction_has_token_transfers?(String.t()) :: boolean()
+  def transaction_has_token_transfers?(transaction_hash_string) do
+    query = from(tt in TokenTransfer, where: tt.transaction_hash == ^transaction_hash_string, limit: 1)
+
+    Repo.one(query) != nil
+  end
 end
