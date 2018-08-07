@@ -1,17 +1,35 @@
 import { reducer, initialState } from '../../js/pages/chain'
 
+test('RECEIVED_NEW_ADDRESS_COUNT', () => {
+  const state = Object.assign({}, initialState, {
+    addressCount: '1,000'
+  })
+  const action = {
+    type: 'RECEIVED_NEW_ADDRESS_COUNT',
+    msg: {
+      count: '1,000,000'
+    }
+  }
+  const output = reducer(state, action)
+
+  expect(output.addressCount).toEqual('1,000,000')
+})
+
 test('RECEIVED_NEW_BLOCK', () => {
   const state = Object.assign({}, initialState, {
+    averageBlockTime: '6 seconds',
     newBlock: 'last new block'
   })
   const action = {
     type: 'RECEIVED_NEW_BLOCK',
     msg: {
+      averageBlockTime: '5 seconds',
       chainBlockHtml: 'new block'
     }
   }
   const output = reducer(state, action)
 
+  expect(output.averageBlockTime).toEqual('5 seconds')
   expect(output.newBlock).toEqual('new block')
 })
 
