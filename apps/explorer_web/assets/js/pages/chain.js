@@ -12,8 +12,11 @@ const BATCH_THRESHOLD = 10
 
 export const initialState = {
   addressCount: null,
+  availableSupply: null,
   averageBlockTime: null,
   batchCountAccumulator: 0,
+  currentExchangeRate: null,
+  marketHistoryData: null,
   newBlock: null,
   newTransactions: [],
   transactionCount: null
@@ -58,6 +61,7 @@ export function reducer (state = initialState, action) {
   }
 }
 
+let chart
 router.when('', { exactPathMatch: true }).then(({ locale }) => initRedux(reducer, {
   main (store) {
     numeral.locale(locale)
@@ -79,7 +83,7 @@ router.when('', { exactPathMatch: true }).then(({ locale }) => initRedux(reducer
       store.dispatch({ type: 'RECEIVED_NEW_TRANSACTION_BATCH', msgs: humps.camelizeKeys(msgs) }))
     )
 
-    createMarketHistoryChart($('[data-chart="marketHistoryChart"]')[0])
+    chart = createMarketHistoryChart($('[data-chart="marketHistoryChart"]')[0])
   },
   render (state, oldState) {
     const $addressCount = $('[data-selector="address-count"]')
@@ -117,6 +121,10 @@ router.when('', { exactPathMatch: true }).then(({ locale }) => initRedux(reducer
       $transactionsList.prepend(newTransactionsToInsert.reverse().join(''))
 
       updateAllAges()
+    }
+
+    if (oldState.currentExchangeRate !== state.currentExchangeRate || oldState.availableSupply !== state.availableSupply || oldState.marketHistoryData !== state.marketHistoryData) {
+      chart.update(state.currentExchangeRate, state.availableSupply, state.marketHistoryData)
     }
   }
 }))

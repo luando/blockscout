@@ -124,6 +124,13 @@ class MarketHistoryChart {
     config.data.datasets = [this.price, this.marketCap]
     this.chart = new Chart(el, config)
   }
+  update (currentExchangeRate, availableSupply, marketHistoryData) {
+    const currentMarketHistoryData = getCurrentMarketHistoryData(currentExchangeRate, marketHistoryData)
+
+    this.price.data = getPriceData(currentMarketHistoryData)
+    this.marketCap.data = getMarketCapData(currentMarketHistoryData, availableSupply)
+    this.chart.update()
+  }
 }
 
 export function createMarketHistoryChart (ctx) {
