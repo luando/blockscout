@@ -6,6 +6,7 @@ import router from '../router'
 import socket from '../socket'
 import { updateAllAges } from '../lib/from_now'
 import { batchChannel, initRedux } from '../utils'
+import { createMarketHistoryChart } from '../lib/market_history_chart'
 
 const BATCH_THRESHOLD = 10
 
@@ -77,6 +78,8 @@ router.when('', { exactPathMatch: true }).then(({ locale }) => initRedux(reducer
     transactionsChannel.on('new_transaction', batchChannel((msgs) =>
       store.dispatch({ type: 'RECEIVED_NEW_TRANSACTION_BATCH', msgs: humps.camelizeKeys(msgs) }))
     )
+
+    createMarketHistoryChart($('[data-chart="marketHistoryChart"]')[0])
   },
   render (state, oldState) {
     const $addressCount = $('[data-selector="address-count"]')
