@@ -1526,4 +1526,11 @@ defmodule Explorer.Chain do
     |> Token.from_address()
     |> Repo.all()
   end
+
+  @spec count_tokens_from_address_hash(Hash.Address.t()) :: non_neg_integer()
+  def count_tokens_from_address_hash(address_hash) do
+    address_hash
+    |> Token.from_address()
+    |> Repo.aggregate(:count, :contract_address_hash)
+  end
 end

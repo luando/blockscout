@@ -1641,4 +1641,36 @@ defmodule Explorer.ChainTest do
       assert expected_tokens == [token.name]
     end
   end
+
+  describe "count_tokens_from_address_hash/1" do
+    test "counts the tokens that the given address has interacted with" do
+      alice = insert(:address)
+
+      token_a =
+        :token
+        |> insert(name: "token-1")
+        |> Repo.preload(:contract_address)
+
+      token_b =
+        :token
+        |> insert(name: "token-2")
+        |> Repo.preload(:contract_address)
+
+      insert(
+        :token_transfer,
+        token_contract_address: token_a.contract_address,
+        from_address: alice,
+        to_address: build(:address)
+      )
+
+      insert(
+        :token_transfer,
+        token_contract_address: token_b.contract_address,
+        from_address: build(:address),
+        to_address: alice
+      )
+
+      assert Chain.count_tokens_from_address_hash(alice.hash) == 2
+    end
+  end
 end
