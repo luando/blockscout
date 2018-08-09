@@ -19,8 +19,14 @@ defmodule ExplorerWeb.TransactionListPage do
     css("[data-transaction-hash='#{hash}'] [data-test='transaction_type']", text: "Contract Creation")
   end
 
-  def non_loaded_transaction_count(count) do
-    css("[data-selector='channel-batching-count']", text: count)
+  def non_loaded_transaction_count(session) do
+    try do
+      session
+      |> find(css("[data-selector='channel-batching-count']"))
+      |> Wallaby.Element.text
+    rescue
+      _ -> ""
+    end
   end
 
   def transaction(%Transaction{hash: transaction_hash}) do

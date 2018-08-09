@@ -122,7 +122,11 @@ defmodule ExplorerWeb.ViewingTransactionsTest do
 
       Notifier.handle_event({:chain_event, :transactions, transaction_hashes})
 
-      assert_has(session, TransactionListPage.non_loaded_transaction_count("30"))
+      if TransactionListPage.non_loaded_transaction_count(session) != "30" do
+        :timer.sleep(1000)
+      end
+
+      assert TransactionListPage.non_loaded_transaction_count(session) == "30"
     end
   end
 
