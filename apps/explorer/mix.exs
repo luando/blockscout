@@ -81,6 +81,8 @@ defmodule Explorer.Mixfile do
       {:httpoison, "~> 1.0", override: true},
       {:jason, "~> 1.0"},
       {:junit_formatter, ">= 0.0.0", only: [:test], runtime: false},
+      # address validation
+      # {:keccakf1600, "~> 2.0.0"},
       {:math, "~> 0.3.0"},
       {:mock, "~> 0.3.0", only: [:test], runtime: false},
       {:mox, "~> 0.4", only: [:test]},
