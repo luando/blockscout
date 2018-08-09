@@ -92,6 +92,13 @@ defmodule ExplorerWeb.Router do
         only: [:index, :show],
         as: :read_contract
       )
+
+      resources(
+        "/token-balances",
+        TokenBalanceController,
+        only: [:index],
+        as: :token_balances
+      )
     end
 
     resources("/tokens", TokenController, only: [:show], as: :token)

@@ -1,6 +1,6 @@
 <section>
   <div class="row">
-    <div class="col-md-12 col-lg-8">
+    <div class="col-md-12 col-lg-6">
       <div class="card">
         <div class="card-body">
           <div class="icon-links float-right">
@@ -52,9 +52,14 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-lg-4" data-selector="balance-card">
+    <div class="col-md-6 col-lg-3" data-selector="balance-card">
       <%= render ExplorerWeb.AddressView, "_balance_card.html", address: @address, exchange_rate: @exchange_rate %>
     </div>
+    <%= if @tokens_count > 0 do %>
+      <div class="col-md-6 col-lg-3">
+        <%= render ExplorerWeb.AddressView, "_token_holdings.html", conn: @conn, tokens_count: @tokens_count, address: @address %>
+      </div>
+    <% end %>
   </div>
 </section>
 

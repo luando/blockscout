@@ -27,6 +27,7 @@ defmodule ExplorerWeb.AddressInternalTransactionController do
       internal_transactions_plus_one = Chain.address_to_internal_transactions(address, full_options)
 
       {internal_transactions, next_page} = split_list_by_page(internal_transactions_plus_one)
+      tokens_count = Chain.count_tokens_from_address_hash(address_hash)
 
       render(
         conn,
@@ -36,7 +37,8 @@ defmodule ExplorerWeb.AddressInternalTransactionController do
         exchange_rate: Market.get_exchange_rate(Explorer.coin()) || Token.null(),
         filter: params["filter"],
         internal_transactions: internal_transactions,
-        transaction_count: transaction_count(address)
+        transaction_count: transaction_count(address),
+        tokens_count: tokens_count
       )
     else
       :error ->

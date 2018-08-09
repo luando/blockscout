@@ -11,6 +11,7 @@ defmodule ExplorerWeb.AddressReadContractController do
     with {:ok, address_hash} <- Chain.string_to_address_hash(address_hash_string),
          {:ok, address} <- Chain.find_contract_address(address_hash) do
       read_only_functions = Reader.read_only_functions(address_hash)
+      tokens_count = Chain.count_tokens_from_address_hash(address_hash)
 
       render(
         conn,
@@ -18,7 +19,8 @@ defmodule ExplorerWeb.AddressReadContractController do
         read_only_functions: read_only_functions,
         address: address,
         exchange_rate: Market.get_exchange_rate(Explorer.coin()) || Token.null(),
-        transaction_count: transaction_count(address)
+        transaction_count: transaction_count(address),
+        tokens_count: tokens_count
       )
     else
       :error ->

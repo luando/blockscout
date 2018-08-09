@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title"><%= gettext "Token Holdings" %></h2>
+
+    <!-- Dropdown -->
+    <div data-token-balance-dropdown
+         data-api-path=<%= address_token_balances_path(@conn, :index, :en, @address.hash) %>
+         class="icon-links ml-3 mb-3"
+         >
+      <a href="#"
+         data-dropdown-toggle
+         data-toggle="dropdown"
+         role="button"
+         class="icon-link"
+         id="dropdown-tokens"
+         aria-haspopup="true"
+         aria-expanded="false">
+        <i class="fas fa-chevron-circle-down"></i>
+      </a>
+      <span class="ml-2" style="font-size: 1rem"><%= @tokens_count %> Tokens</span>
+
+      <div class="dropdown-menu p-0 token-balance-dropdown" aria-labelledby="dropdown-tokens">
+      </div>
+    </div>
+  </div>
+</div>

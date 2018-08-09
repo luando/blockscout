@@ -1,0 +1,33 @@
+<%= if Enum.any?(@tokens, & &1.type == "ERC-721") do %>
+  <h6 class="dropdown-header border-bottom">ERC-721</h6>
+
+  <%= for token <- Enum.filter(@tokens, & &1.type == "ERC-721") do %>
+    <div class="border-bottom">
+      <%= link(
+            to: token_path(@conn, :show, :en, token.contract_address_hash),
+            class: "dropdown-item",
+            style: "font-size: 0.875rem"
+          ) do %>
+        <div><%= token.name %></div>
+        <div><%= balance_formatted(token) %> <%= token_symbol(token) %></div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= if Enum.any?(@tokens, & &1.type == "ERC-20") do %>
+  <h6 class="dropdown-header border-bottom">ERC-20</h6>
+
+  <%= for token <- Enum.filter(@tokens, & &1.type == "ERC-20") do %>
+    <div class="border-bottom">
+      <%= link(
+            to: token_path(@conn, :show, :en, token.contract_address_hash),
+            class: "dropdown-item",
+            style: "font-size: 0.875rem"
+          ) do %>
+        <div><%= token.name %></div>
+        <div><%= balance_formatted(token) %> <%= token_symbol(token) %></div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
