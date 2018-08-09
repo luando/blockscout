@@ -18,6 +18,7 @@ defmodule ExplorerWeb.EventHandler do
   def init([]) do
     Chain.subscribe_to_events(:addresses)
     Chain.subscribe_to_events(:blocks)
+    Chain.subscribe_to_events(:exchange_rate)
     Chain.subscribe_to_events(:transactions)
     {:ok, []}
   end

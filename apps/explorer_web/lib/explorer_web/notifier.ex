@@ -6,6 +6,7 @@ defmodule ExplorerWeb.Notifier do
   alias Explorer.{Chain, Market, Repo}
   alias Explorer.Chain.Address
   alias Explorer.ExchangeRates.Token
+  alias Explorer.Market
   alias ExplorerWeb.Endpoint
 
   def handle_event({:chain_event, :addresses, addresses}) do
@@ -19,6 +20,12 @@ defmodule ExplorerWeb.Notifier do
 
   def handle_event({:chain_event, :blocks, blocks}) do
     Enum.each(blocks, &broadcast_block/1)
+  end
+
+  def handle_event({:chain_event, :exchange_rate}) do
+    exchange_rate = Market.get_exchange_rate(Explorer.coin()) || Token.null()
+
+    Endpoint.broadcast("exchange_rate:new_rate", "new_rate", %{exchange_rate: exchange_rate})
   end
 
   def handle_event({:chain_event, :transactions, transaction_hashes}) do
