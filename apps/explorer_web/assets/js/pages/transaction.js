@@ -88,6 +88,7 @@ router.when('/transactions/:transactionHash').then(({ locale }) => initRedux(red
 }))
 
 router.when('/transactions', { exactPathMatch: true }).then((params) => initRedux(reducer, {
+  debug: true,
   main (store) {
     const { locale, index } = params
     const transactionsChannel = socket.channel(`transactions:new_transaction`)

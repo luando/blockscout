@@ -6,7 +6,7 @@ export function batchChannel (func) {
   const debouncedFunc = _.debounce(() => {
     func.apply(this, [msgs])
     msgs = []
-  }, 1000, { maxWait: 5000 })
+  }, 3000, { maxWait: 5000 })
   return (msg) => {
     msgs.push(msg)
     debouncedFunc()
@@ -21,7 +21,7 @@ export function initRedux (reducer, { main, render, debug } = {}) {
   if (!render) console.warn('initRedux: You have not passed a render function.')
 
   const store = createStore(reducer)
-  if (debug) store.subscribe(() => { console.log(store.getState()) })
+  if (debug) store.subscribe(() => { console.log(JSON.stringify(store.getState())) })
   let oldState = store.getState()
   if (render) {
     store.subscribe(() => {
