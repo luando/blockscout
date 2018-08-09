@@ -1544,4 +1544,101 @@ defmodule Explorer.ChainTest do
     %Token{contract_address_hash: uncatalog_address} = insert(:token, cataloged: false)
     assert Chain.stream_uncataloged_token_contract_address_hashes([], &[&1 | &2]) == {:ok, [uncatalog_address]}
   end
+
+  describe "fetch_tokens_from_address_hash/1" do
+    test "returns only tokens that given address have interacted with" do
+      alice = insert(:address)
+
+      token_a =
+        :token
+        |> insert(name: "token-1")
+        |> Repo.preload(:contract_address)
+
+      token_b =
+        :token
+        |> insert(name: "token-2")
+        |> Repo.preload(:contract_address)
+
+      token_c =
+        :token
+        |> insert(name: "token-3")
+        |> Repo.preload(:contract_address)
+
+      insert(
+        :token_transfer,
+        token_contract_address: token_a.contract_address,
+        from_address: alice,
+        to_address: build(:address)
+      )
+
+      insert(
+        :token_transfer,
+        token_contract_address: token_b.contract_address,
+        from_address: build(:address),
+        to_address: alice
+      )
+
+      insert(
+        :token_transfer,
+        token_contract_address: token_c.contract_address,
+        from_address: build(:address),
+        to_address: build(:address)
+      )
+
+      expected_tokens =
+        alice.hash
+        |> Chain.fetch_tokens_from_address_hash()
+        |> Enum.map(& &1.name)
+
+      assert expected_tokens == [token_a.name, token_b.name]
+    end
+
+    test "returns a empty list when the given address hasn't interacted with one" do
+      alice = insert(:address)
+
+      token =
+        :token
+        |> insert(name: "token-1")
+        |> Repo.preload(:contract_address)
+
+      insert(
+        :token_transfer,
+        token_contract_address: token.contract_address,
+        from_address: build(:address),
+        to_address: build(:address)
+      )
+
+      assert Chain.fetch_tokens_from_address_hash(alice.hash) == []
+    end
+
+    test "distinct tokens by contract_address_hash" do
+      alice = insert(:address)
+
+      token =
+        :token
+        |> insert(name: "token-1")
+        |> Repo.preload(:contract_address)
+
+      insert(
+        :token_transfer,
+        token_contract_address: token.contract_address,
+        from_address: alice,
+        to_address: build(:address)
+      )
+
+      insert(
+        :token_transfer,
+        token_contract_address: token.contract_address,
+        from_address: build(:address),
+        to_address: alice
+      )
+
+      expected_tokens =
+        alice.hash
+        |> Chain.fetch_tokens_from_address_hash()
+        |> Enum.map(& &1.name)
+
+      assert expected_tokens == [token.name]
+    end
+  end
 end

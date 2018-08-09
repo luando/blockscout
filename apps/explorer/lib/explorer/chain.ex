@@ -1519,4 +1519,11 @@ defmodule Explorer.Chain do
   def count_addresses_in_token_transfers_from_token_hash(token_address_hash) do
     TokenTransfer.count_addresses_in_token_transfers_from_token_hash(token_address_hash)
   end
+
+  @spec fetch_tokens_from_address_hash(Hash.Address.t()) :: []
+  def fetch_tokens_from_address_hash(address_hash) do
+    address_hash
+    |> Token.from_address()
+    |> Repo.all()
+  end
 end
