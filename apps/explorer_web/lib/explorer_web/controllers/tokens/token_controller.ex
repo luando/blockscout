@@ -1,4 +1,4 @@
-defmodule ExplorerWeb.TokenController do
+defmodule ExplorerWeb.Tokens.TokenController do
   use ExplorerWeb, :controller
 
   alias Explorer.Chain

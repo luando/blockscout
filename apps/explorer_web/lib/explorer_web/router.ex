@@ -94,7 +94,14 @@ defmodule ExplorerWeb.Router do
       )
     end
 
-    resources("/tokens", TokenController, only: [:show], as: :token)
+    resources "/tokens", Tokens.TokenController, only: [:show], as: :token do
+      resources(
+        "/read_contract",
+        Tokens.ReadContractController,
+        only: [:index],
+        as: :read_contract
+      )
+    end
 
     get("/search", ChainController, :search)
 

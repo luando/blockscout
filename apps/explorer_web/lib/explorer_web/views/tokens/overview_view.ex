@@ -1,4 +1,4 @@
-defmodule ExplorerWeb.TokenView do
+defmodule ExplorerWeb.Tokens.OverviewView do
   use ExplorerWeb, :view
 
   alias Explorer.Chain.Token

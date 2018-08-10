@@ -1,4 +1,4 @@
-defmodule ExplorerWeb.TokenHelpers do
+defmodule ExplorerWeb.Tokens.Helpers do
   @moduledoc """
   Helper functions for intereacting with `t:ExplorerWeb.Chain.Token` attributes.
   """

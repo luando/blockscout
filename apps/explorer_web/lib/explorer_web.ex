@@ -33,7 +33,8 @@ defmodule ExplorerWeb do
     quote do
       use Phoenix.View,
         root: "lib/explorer_web/templates",
-        namespace: ExplorerWeb
+        namespace: ExplorerWeb,
+        pattern: "**/*"
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -46,7 +47,7 @@ defmodule ExplorerWeb do
         ErrorHelpers,
         Gettext,
         Router.Helpers,
-        TokenHelpers,
+        Tokens.Helpers,
         WeiHelpers
       }
     end
