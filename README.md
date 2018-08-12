@@ -1,4 +1,4 @@
-# BlockScout [![CircleCI](https://circleci.com/gh/poanetwork/poa-explorer.svg?style=svg&circle-token=f8823a3d0090407c11f87028c73015a331dbf604)](https://circleci.com/gh/poanetwork/poa-explorer) [![Coverage Status](https://coveralls.io/repos/github/poanetwork/poa-explorer/badge.svg?branch=master)](https://coveralls.io/github/poanetwork/poa-explorer?branch=master)
+# BlockScout [![CircleCI](https://circleci.com/gh/poanetwork/blockscout.svg?style=svg&circle-token=f8823a3d0090407c11f87028c73015a331dbf604)](https://circleci.com/gh/poanetwork/blockscout) [![Coverage Status](https://coveralls.io/repos/github/poanetwork/blockscout/badge.svg?branch=master)](https://coveralls.io/github/poanetwork/blockscout?branch=master)
 
 BlockScout provides a comprehensive, easy-to-use interface for users to view, confirm, and inspect transactions on **all EVM** (Ethereum Virtual Machine) blockchains. This includes the Ethereum main and test networks as well as **Ethereum forks and sidechains**.
 
@@ -15,7 +15,7 @@ The first release will include a block explorer for the POA core and Sokol test 
 
 ### Features
 
-Development is ongoing. Please see the [project timeline](https://github.com/poanetwork/poa-explorer/wiki/Timeline-for-POA-Block-Explorer) for projected milestones.
+Development is ongoing. Please see the [project timeline](https://github.com/poanetwork/blockscout/wiki/Timeline-for-POA-Block-Explorer) for projected milestones.
 
 - [x] **Open source development**: The code is community driven and available for anyone to use, explore and improve.
 
@@ -31,11 +31,11 @@ Development is ongoing. Please see the [project timeline](https://github.com/poa
 
 ## Getting Started
 
-We use [Terraform](https://www.terraform.io/intro/getting-started/install.html) to build the correct infrastructure to run BlockScout. See [https://github.com/poanetwork/poa-explorer-infra](https://github.com/poanetwork/poa-explorer-infra) for details.
+We use [Terraform](https://www.terraform.io/intro/getting-started/install.html) to build the correct infrastructure to run BlockScout. See [https://github.com/poanetwork/blockscout-infra](https://github.com/poanetwork/blockscout-infra) for details.
 
 ### Requirements
 
-The [development stack page](https://github.com/poanetwork/poa-explorer/wiki/Development-Stack) contains more information about these frameworks.
+The [development stack page](https://github.com/poanetwork/blockscout/wiki/Development-Stack) contains more information about these frameworks.
 
 * [Erlang/OTP 21.0.4](https://github.com/erlang/otp)
 * [Elixir 1.7.1](https://elixir-lang.org/)
@@ -50,10 +50,10 @@ The [development stack page](https://github.com/poanetwork/poa-explorer/wiki/Dev
 ### Build and Run
 
   1. Clone the repository.  
-  `git clone https://github.com/poanetwork/poa-explorer`
+  `git clone https://github.com/poanetwork/blockscout`
 
   2. Go to the explorer subdirectory.  
-  `cd poa-explorer`
+  `cd blockscout`
 
   3. Set up default configurations.  
   `cp apps/explorer/config/dev.secret.exs.example apps/explorer/config/dev.secret.exs`  
@@ -108,7 +108,7 @@ Each OTP application has a restricted domain.
 
 ### CircleCI Updates
 
-To monitor build status, configure your local [CCMenu](http://ccmenu.org/) with the following url: [`https://circleci.com/gh/poanetwork/poa-explorer.cc.xml?circle-token=f8823a3d0090407c11f87028c73015a331dbf604`](https://circleci.com/gh/poanetwork/poa-explorer.cc.xml?circle-token=f8823a3d0090407c11f87028c73015a331dbf604)
+To monitor build status, configure your local [CCMenu](http://ccmenu.org/) with the following url: [`https://circleci.com/gh/poanetwork/blockscout.cc.xml?circle-token=f8823a3d0090407c11f87028c73015a331dbf604`](https://circleci.com/gh/poanetwork/blockscout.cc.xml?circle-token=f8823a3d0090407c11f87028c73015a331dbf604)
 
 
 ### Testing
