@@ -121,7 +121,9 @@ defmodule EthereumJSONRPC do
   def execute_contract_functions(functions, json_rpc_named_arguments) do
     functions
     |> Enum.map(&build_eth_call_payload/1)
+    |> IO.inspect()
     |> json_rpc(json_rpc_named_arguments)
+    |> IO.inspect()
   end
 
   defp build_eth_call_payload(%{contract_address: address, data: data, id: id}) do

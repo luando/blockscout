@@ -91,6 +91,10 @@ defmodule Explorer.SmartContract.Reader do
   @spec query_contract(String.t(), term(), functions(), EthereumJSONRPC.json_rpc_named_arguments()) ::
           functions_results()
   defp query_contract(contract_address, abi, functions, json_rpc_named_arguments) do
+    IO.puts("=========================")
+    IO.inspect(json_rpc_named_arguments)
+    IO.puts("=========================")
+
     blockchain_result =
       abi
       |> Encoder.encode_abi(functions)
