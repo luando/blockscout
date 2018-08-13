@@ -14,4 +14,6 @@ Application.put_env(:wallaby, :base_url, ExplorerWeb.Endpoint.url())
 ExUnit.configure(formatters: [JUnitFormatter, ExUnit.CLIFormatter])
 ExUnit.start()
 
+Mox.defmock(Explorer.ExchangeRates.Source.TestSource, for: Explorer.ExchangeRates.Source)
+
 Ecto.Adapters.SQL.Sandbox.mode(Explorer.Repo, :manual)

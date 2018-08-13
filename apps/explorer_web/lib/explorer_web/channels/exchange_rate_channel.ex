@@ -1,11 +1,10 @@
-defmodule ExplorerWeb.ExchangeChannel do
+defmodule ExplorerWeb.ExchangeRateChannel do
   @moduledoc """
   Establishes pub/sub channel for address page live updates.
   """
   use ExplorerWeb, :channel
 
   alias ExplorerWeb.ChainView
-  alias Phoenix.View
 
   intercept(["new_rate"])
 
@@ -17,8 +16,8 @@ defmodule ExplorerWeb.ExchangeChannel do
     Gettext.put_locale(ExplorerWeb.Gettext, socket.assigns.locale)
 
     push(socket, "transaction", %{
-      exchange_rate: format_exchange_rate(exchange_rate),
-      market_cap: format_market_cap(exchange_rate)
+      exchange_rate: ChainView.format_exchange_rate(exchange_rate),
+      market_cap: ChainView.format_market_cap(exchange_rate)
     })
 
     {:noreply, socket}
