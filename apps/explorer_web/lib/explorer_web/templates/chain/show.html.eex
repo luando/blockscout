@@ -9,7 +9,7 @@
           <span class="dashboard-banner-chart-legend-label">
             <%= gettext "Price" %>
           </span>
-          <span class="dashboard-banner-chart-legend-value">
+          <span class="dashboard-banner-chart-legend-value" data-selector="exchange-rate">
             <%= format_exchange_rate(@exchange_rate) %>
           </span>
         </div>
@@ -17,7 +17,7 @@
           <span class="dashboard-banner-chart-legend-label">
             <%= gettext "Market Cap" %>
           </span>
-          <span class="dashboard-banner-chart-legend-value">
+          <span class="dashboard-banner-chart-legend-value" data-selector="market-cap">
             <%= format_market_cap(@exchange_rate) %>
           </span>
         </div>
